@@ -8,11 +8,17 @@
         <version>3.0.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <modules>
+        <module>embedded-id</module>
+        <module>id-class</module>
+        <module>multiple-id</module>
+    </modules>
     <groupId>com.example.learning</groupId>
     <artifactId>jpa-composite-primary-key</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>jpa-composite-primary-key</name>
     <description>jpa-composite-primary-key</description>
+    <packaging>pom</packaging>
     <properties>
         <java.version>17</java.version>
     </properties>
