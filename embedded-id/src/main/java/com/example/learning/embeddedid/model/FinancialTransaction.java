@@ -15,7 +15,7 @@ import lombok.ToString;
 public class FinancialTransaction {
 
     @EmbeddedId
-    FinancialTransactionId financialTransactionId;
+    private FinancialTransactionId financialTransactionId;
 
     @ManyToOne
     @JoinColumn(name = "company_fk")

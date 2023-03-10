@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @ToString
-public class FinancialTransaction implements Serializable {
+public class FinancialTransaction {
 
     @Id
     @GeneratedValue
