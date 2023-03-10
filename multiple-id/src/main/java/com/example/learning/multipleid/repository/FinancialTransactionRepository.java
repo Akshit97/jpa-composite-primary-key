@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserRepository {
+public class FinancialTransactionRepository {
 
     private SessionFactory sessionFactory;
 
     @Autowired
-    public UserRepository(SessionFactory sessionFactory) {
+    public FinancialTransactionRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

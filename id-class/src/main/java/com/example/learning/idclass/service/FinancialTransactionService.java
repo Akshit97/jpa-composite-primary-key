@@ -4,7 +4,7 @@ import com.example.learning.idclass.model.Company;
 import com.example.learning.idclass.model.FinancialTransaction;
 import com.example.learning.idclass.model.FinancialTransactionId;
 import com.example.learning.idclass.repository.CompanyRepository;
-import com.example.learning.idclass.repository.UserRepository;
+import com.example.learning.idclass.repository.FinancialTransactionRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +14,14 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class UserService {
+public class FinancialTransactionService {
 
-    private UserRepository userRepository;
+    private FinancialTransactionRepository financialTransactionRepository;
     private CompanyRepository companyRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, CompanyRepository companyRepository) {
-        this.userRepository = userRepository;
+    public FinancialTransactionService(FinancialTransactionRepository financialTransactionRepository, CompanyRepository companyRepository) {
+        this.financialTransactionRepository = financialTransactionRepository;
         this.companyRepository = companyRepository;
     }
 
@@ -39,25 +39,30 @@ public class UserService {
         //CREATE
         log.info("CREATE STARTED");
         FinancialTransaction financialTransaction1 = new FinancialTransaction(company, 100, "Debit");
-        financialTransaction1 = userRepository.save(financialTransaction1);
+        financialTransaction1 = financialTransactionRepository.save(financialTransaction1);
         log.info("CREATE COMPLETED");
 
         //READ
         log.info("READ STARTED");
         FinancialTransactionId financialTransactionId = new FinancialTransactionId(financialTransaction1.getFinancial_transaction_seq(), financialTransaction1.getCompany().getCompany_seq());
-        Optional<FinancialTransaction> optionalUser = userRepository.findById(financialTransactionId);
+        Optional<FinancialTransaction> optionalUser = financialTransactionRepository.findById(financialTransactionId);
         FinancialTransaction financialTransaction = optionalUser.get();
         log.info("READ COMPLETED");
+
+        //Query
+        log.info("QUERY STARTED");
+        FinancialTransaction financialTransaction2 = financialTransactionRepository.getFinancialTransactionByFinancialTransactionSequence(1L);
+        log.info("QUERY COMPLETED");
 
         //UPDATE
         log.info("UPDATE STARTED");
         financialTransaction.setMoney(200);
-        userRepository.save(financialTransaction);
+        financialTransactionRepository.save(financialTransaction);
         log.info("UPDATE COMPLETED");
 
         //DELETE
         log.info("DELETE STARTED");
-        userRepository.delete(financialTransaction);
+        financialTransactionRepository.delete(financialTransaction);
         log.info("DELETE COMPLETED");
     }
 }
